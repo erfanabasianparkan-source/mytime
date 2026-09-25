@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>پلنر روزانه</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <button class="menu-btn" onclick="openMenu()">☰</button>
+    <div style="font-size:13px;color:var(--sub)">پلنر من</div>
+  </header>
+  <div class="clock" id="clock">--:--:--</div>
+  <div class="date"><div class="jalali" id="jdate">-</div><div class="greg" id="gdate">-</div></div>
+
+  <div class="big-btns">
+    <button class="big-btn btn-wake" id="wakeBtn" onclick="onWake()">بیدار شدم</button>
+    <button class="big-btn btn-adhoc" onclick="openAdhoc()">کار یهویی</button>
+  </div>
+  <button class="btn-sleep" onclick="onSleep()">رفتم بخوابم 🌙</button>
+  <button class="btn-bad" onclick="onBadDay()">امروز روز بدیه — فقط کارهای اصلی رو نگه‌دار</button>
+
+  <div id="msgBox"></div>
+  <div class="timeline" id="timeline"></div>
+
+  <h3 style="margin:22px 2px 8px;font-size:14px;color:var(--sub)">برنامه فردا</h3>
+  <div class="timeline" id="tomorrowTimeline"></div>
+</div>
+
+<!-- Hamburger menu -->
+<div class="sheet-bg" id="menuBg" onclick="closeMenu()"></div>
+<div class="sheet" id="menuSheet">
+  <button class="close-x" onclick="closeMenu()">×</button>
+  <h3>دسته‌های کار</h3>
+  <button class="cat-btn" onclick="openList('fixed')"><span>🔵 کارهای اصلی</span><span>›</span></button>
+  <button class="cat-btn" onclick="openList('semi')"><span>🟠 نیمه‌مهم</span><span>›</span></button>
+  <button class="cat-btn" onclick="openList('daily')"><span>🟢 روزانه</span><span>›</span></button>
+  <button class="cat-btn" onclick="openList('reminder')"><span>🟣 یادآوری‌ها</span><span>›</span></button>
+  <button class="cat-btn" onclick="openList('project')"><span>🌸 پروژه/تسک‌لیست</span><span>›</span></button>
+  <h3>دیگر</h3>
+  <button class="cat-btn" onclick="openSettings()">⚙️ تنظیمات</button>
+  <button class="cat-btn" onclick="openClasses()">🎓 برنامه کلاسی</button>
+  <button class="cat-btn" onclick="exportBackup()">⬇️ دانلود بکاپ (JSON)</button>
+  <button class="cat-btn" onclick="document.getElementById('restoreFile').click()">⬆️ بازیابی از فایل</button>
+  <input type="file" id="restoreFile" accept=".json" style="display:none" onchange="importBackup(event)">
+</div>
+
+<!-- Generic list sheet -->
+<div class="sheet-bg" id="listBg" onclick="closeList()"></div>
+<div class="sheet" id="listSheet">
+  <button class="close-x" onclick="closeList()">×</button>
+  <h3 id="listTitle">لیست</h3>
+  <div id="listBody"></div>
+  <button class="add-fab" style="margin-top:10px;width:100%" onclick="openTaskModal(null,currentListType)">+ افزودن</button>
+</div>
+
+<!-- Task modal -->
+<div class="modal-bg" id="taskModalBg"><div class="modal" id="taskModal"></div></div>
+<!-- Settings modal -->
+<div class="modal-bg" id="settingsBg"><div class="modal" id="settingsModal"></div></div>
+<!-- Classes modal -->
+<div class="modal-bg" id="classesBg"><div class="modal" id="classesModal"></div></div>
+<!-- Adhoc modal -->
+<div class="modal-bg" id="adhocBg"><div class="modal" id="adhocModal"></div></div>
+
+<script src="app.js"></script>
+</body>
+</html>
